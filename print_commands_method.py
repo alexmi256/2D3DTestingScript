@@ -24,7 +24,7 @@ for method in methods:
     depth_aa = False
     tta = False
 
-    command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --method {method} --output ~/Downloads/images_cropped/sample/right_generated_method/{method}/"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/{method}/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --method {method} --output ~/Downloads/images_cropped/sample/right_generated_method/{method}/"
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"
     if depth_aa:

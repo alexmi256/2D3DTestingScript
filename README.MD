@@ -62,8 +62,92 @@ For right image only synthetic view:
   - `param_generated` contains generated right frame images with the `--find-params` option, this one is weird because input is only one image and not a `dir`
 
 # Scripts
-## print_commands.py
-Prints the commands to generate the right sample images for all models with nunif iw3.cli
+## print_commands_models.py
+Prints `nunif iw3.cli`  commands to generate the right sample images for all models and user set params
+```sh
+source .venv/bin/activate
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model ZoeD_N --output ~/Downloads/images_cropped/sample/right_generated/ZoeD_N/ --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model ZoeD_K --output ~/Downloads/images_cropped/sample/right_generated/ZoeD_K/ --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model ZoeD_NK --output ~/Downloads/images_cropped/sample/right_generated/ZoeD_NK/ --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_S --output ~/Downloads/images_cropped/sample/right_generated/Any_S/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_B --output ~/Downloads/images_cropped/sample/right_generated/Any_B/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_L --output ~/Downloads/images_cropped/sample/right_generated/Any_L/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model ZoeD_Any_N --output ~/Downloads/images_cropped/sample/right_generated/ZoeD_Any_N/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model ZoeD_Any_K --output ~/Downloads/images_cropped/sample/right_generated/ZoeD_Any_K/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_S --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_S/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_B --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_B/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_L --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_L/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_N --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_N/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_K --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_K/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_N_S --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_N_S/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_N_B --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_N_B/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_N_L --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_N_L/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_K_S --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_K_S/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_K_B --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_K_B/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Any_V2_K_L --output ~/Downloads/images_cropped/sample/right_generated/Any_V2_K_L/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Distill_Any_S --output ~/Downloads/images_cropped/sample/right_generated/Distill_Any_S/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Distill_Any_B --output ~/Downloads/images_cropped/sample/right_generated/Distill_Any_B/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model Distill_Any_L --output ~/Downloads/images_cropped/sample/right_generated/Distill_Any_L/ --edge-dilation 2 --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model DepthPro --output ~/Downloads/images_cropped/sample/right_generated/DepthPro/ --depth-aa --tta --method mlbw_l4s
+python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence 0.5 --divergence 4.0 --depth-model DepthPro_S --output ~/Downloads/images_cropped/sample/right_generated/DepthPro_S/ --depth-aa --tta --method mlbw_l4s
+```
+
+## print_commands_mapper.py
+Prints `nunif iw3.cli`  commands to generate the right sample images for all mappers
+```sh
+source .venv/bin/activate
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_08; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_08 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_08/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/mul_2; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper mul_2 --output ~/Downloads/images_cropped/sample/mapper_generated/mul_2/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/none; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper none --output ~/Downloads/images_cropped/sample/mapper_generated/none/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_14; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_14 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_14/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_2; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper inv_mul_2 --output ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_2/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_30; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_30 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_30/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/softplus2; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper softplus2 --output ~/Downloads/images_cropped/sample/mapper_generated/softplus2/
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_06; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_06 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_06/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_3; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper inv_mul_3 --output ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_3/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_4; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_4 --output ~/Downloads/images_cropped/sample/mapper_generated/div_4/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/mul_3; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper mul_3 --output ~/Downloads/images_cropped/sample/mapper_generated/mul_3/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_25; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_25 --output ~/Downloads/images_cropped/sample/mapper_generated/div_25/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/pow2; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper pow2 --output ~/Downloads/images_cropped/sample/mapper_generated/pow2/
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_1; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper inv_mul_1 --output ~/Downloads/images_cropped/sample/mapper_generated/inv_mul_1/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_10; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_10 --output ~/Downloads/images_cropped/sample/mapper_generated/div_10/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_2; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_2 --output ~/Downloads/images_cropped/sample/mapper_generated/div_2/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_6; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_6 --output ~/Downloads/images_cropped/sample/mapper_generated/div_6/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/div_1; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper div_1 --output ~/Downloads/images_cropped/sample/mapper_generated/div_1/ --mapper-type div
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/auto; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper auto --output ~/Downloads/images_cropped/sample/mapper_generated/auto/
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/mul_1; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper mul_1 --output ~/Downloads/images_cropped/sample/mapper_generated/mul_1/ --mapper-type mul
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_20; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_20 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_20/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/shift_045; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper shift_045 --output ~/Downloads/images_cropped/sample/mapper_generated/shift_045/ --mapper-type shift
+mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/softplus; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model Any_B --mapper softplus --output ~/Downloads/images_cropped/sample/mapper_generated/softplus/
+```
+
+## print_commands_methods.py
+Prints `nunif iw3.cli`  commands to generate the right sample images for all methods
+```
+source .venv/bin/activate
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/backward/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method backward --output ~/Downloads/images_cropped/sample/right_generated_method/backward/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/forward/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method forward --output ~/Downloads/images_cropped/sample/right_generated_method/forward/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/forward_fill/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method forward_fill --output ~/Downloads/images_cropped/sample/right_generated_method/forward_fill/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l2/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method mlbw_l2 --output ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l2/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l4/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method mlbw_l4 --output ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l4/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l2s/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method mlbw_l2s --output ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l2s/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l4s/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method mlbw_l4s --output ~/Downloads/images_cropped/sample/right_generated_method/mlbw_l4s/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/row_flow/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method row_flow --output ~/Downloads/images_cropped/sample/right_generated_method/row_flow/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/row_flow_sym/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method row_flow_sym --output ~/Downloads/images_cropped/sample/right_generated_method/row_flow_sym/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v3/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method row_flow_v3 --output ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v3/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v3_sym/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method row_flow_v3_sym --output ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v3_sym/
+mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v2/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method row_flow_v2 --output ~/Downloads/images_cropped/sample/right_generated_method/row_flow_v2/
+```
+
+## print_commands_params.py
+Prints `nunif iw3.cli` commands to generate the right sample images for a subset of images using `--find-params`
+```shell
+source .venv/bin/activate
+mkdir -p ~/Downloads/images_cropped/sample/param_generated/005600_R; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/005600_L.png --synthetic-view right --yes --depth-model ZoeD_Any_N --find-param {divergence,convergence,foreground-scale} --output ~/Downloads/images_cropped/sample/param_generated/005600_R/
+...
+mkdir -p ~/Downloads/images_cropped/sample/param_generated/105500_R; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/105500_L.png --synthetic-view right --yes --depth-model ZoeD_Any_N --find-param {divergence,convergence,foreground-scale} --output ~/Downloads/images_cropped/sample/param_generated/105500_R/
+```
+
 
 ## compare_models.py
 Compares all right generated images to the ground truth and averages a score for each model
@@ -246,113 +330,115 @@ I used `ZoeD_Any_N` as the model to test this with
 I used `ZoeD_Any_N` as the model to test this with
 This generates a combination (80) of divergence, convergence, foreground-scale images just for one image
 I only used a smaller sample of 110 images for this test
-Foreground Scale doesn't appear to do anything despite listed as supported by `ZoeD_Any_N` 
 
 
 | Combination   |   Score |
 |---------------|---------|
-| d50_c0_fs2    |  8.1231 |
+| d50_c7_fs3    |  8.393  |
 | d50_c0_fs0    |  8.1231 |
-| d50_c0_fs3    |  8.1231 |
-| d50_c0_fs1    |  8.1231 |
+| d40_c7_fs3    |  7.8887 |
+| d50_c0_fs1    |  7.8819 |
+| d50_c7_fs2    |  7.6794 |
 | d40_c0_fs0    |  7.4349 |
-| d40_c0_fs1    |  7.4349 |
-| d40_c0_fs2    |  7.4349 |
-| d40_c0_fs3    |  7.4349 |
-| d30_c0_fs1    |  6.9144 |
+| d50_c0_fs2    |  7.4111 |
+| d30_c7_fs3    |  7.3587 |
+| d40_c7_fs2    |  7.2682 |
+| d40_c0_fs1    |  7.2394 |
+| d50_c7_fs1    |  7.0654 |
+| d50_c0_fs3    |  6.9992 |
+| d20_c7_fs3    |  6.982  |
 | d30_c0_fs0    |  6.9144 |
-| d30_c0_fs2    |  6.9144 |
-| d30_c0_fs3    |  6.9144 |
-| d50_c7_fs2    |  6.8131 |
+| d30_c7_fs2    |  6.9109 |
+| d40_c0_fs2    |  6.9107 |
+| d10_c7_fs3    |  6.8345 |
 | d50_c7_fs0    |  6.8131 |
-| d50_c7_fs1    |  6.8131 |
-| d50_c7_fs3    |  6.8131 |
-| d50_c2_fs3    |  6.6905 |
+| d30_c0_fs1    |  6.7973 |
+| d40_c7_fs1    |  6.7889 |
+| d10_c7_fs2    |  6.7429 |
+| d20_c7_fs2    |  6.7379 |
+| d10_c5_fs3    |  6.7204 |
+| d50_c5_fs3    |  6.7195 |
 | d50_c2_fs0    |  6.6905 |
-| d50_c2_fs1    |  6.6905 |
-| d50_c2_fs2    |  6.6905 |
-| d10_c7_fs3    |  6.6651 |
-| d10_c7_fs2    |  6.6651 |
-| d10_c7_fs1    |  6.6651 |
+| d10_c7_fs1    |  6.6849 |
 | d10_c7_fs0    |  6.6651 |
-| d40_c7_fs3    |  6.6126 |
-| d40_c7_fs1    |  6.6126 |
-| d40_c7_fs2    |  6.6126 |
+| d40_c0_fs3    |  6.664  |
+| d10_c5_fs2    |  6.6512 |
+| d10_c2_fs3    |  6.6468 |
+| d30_c0_fs2    |  6.6217 |
+| d10_c5_fs1    |  6.614  |
 | d40_c7_fs0    |  6.6126 |
 | d20_c0_fs0    |  6.6111 |
-| d20_c0_fs3    |  6.6111 |
-| d20_c0_fs1    |  6.6111 |
-| d20_c0_fs2    |  6.6111 |
-| d10_c5_fs2    |  6.603  |
-| d10_c5_fs1    |  6.603  |
-| d10_c5_fs3    |  6.603  |
+| d10_c0_fs3    |  6.6099 |
+| d30_c7_fs1    |  6.6095 |
 | d10_c5_fs0    |  6.603  |
-| d10_c0_fs2    |  6.5788 |
-| d10_c0_fs3    |  6.5788 |
-| d10_c0_fs1    |  6.5788 |
+| d40_c5_fs3    |  6.6025 |
+| d10_c2_fs2    |  6.5991 |
+| d20_c7_fs1    |  6.582  |
+| d10_c0_fs2    |  6.5809 |
 | d10_c0_fs0    |  6.5788 |
-| d10_c2_fs1    |  6.5733 |
-| d10_c2_fs3    |  6.5733 |
-| d10_c2_fs2    |  6.5733 |
+| d20_c5_fs3    |  6.5784 |
+| d10_c2_fs1    |  6.5766 |
+| d10_c0_fs1    |  6.5746 |
 | d10_c2_fs0    |  6.5733 |
-| d20_c7_fs3    |  6.5256 |
+| d20_c0_fs1    |  6.5684 |
+| d30_c5_fs3    |  6.5529 |
+| d50_c2_fs1    |  6.534  |
 | d20_c7_fs0    |  6.5256 |
-| d20_c7_fs1    |  6.5256 |
-| d20_c7_fs2    |  6.5256 |
-| d30_c7_fs1    |  6.5101 |
 | d30_c7_fs0    |  6.5101 |
-| d30_c7_fs3    |  6.5101 |
-| d30_c7_fs2    |  6.5101 |
-| d40_c2_fs1    |  6.485  |
+| d20_c0_fs2    |  6.5033 |
+| d30_c0_fs3    |  6.5023 |
 | d40_c2_fs0    |  6.485  |
-| d40_c2_fs2    |  6.485  |
-| d40_c2_fs3    |  6.485  |
-| d20_c2_fs2    |  6.4094 |
-| d20_c2_fs3    |  6.4094 |
-| d20_c2_fs1    |  6.4094 |
+| d20_c0_fs3    |  6.4745 |
+| d20_c2_fs3    |  6.4435 |
+| d20_c5_fs2    |  6.4378 |
 | d20_c2_fs0    |  6.4094 |
-| d30_c2_fs3    |  6.3981 |
-| d30_c2_fs2    |  6.3981 |
 | d30_c2_fs0    |  6.3981 |
-| d30_c2_fs1    |  6.3981 |
+| d20_c2_fs1    |  6.3899 |
+| d40_c2_fs1    |  6.3883 |
+| d20_c2_fs2    |  6.3859 |
+| d20_c5_fs1    |  6.3669 |
 | d20_c5_fs0    |  6.3532 |
-| d20_c5_fs3    |  6.3532 |
-| d20_c5_fs2    |  6.3532 |
-| d20_c5_fs1    |  6.3532 |
-| d30_c5_fs2    |  6.1943 |
-| d30_c5_fs3    |  6.1943 |
+| d30_c2_fs1    |  6.3474 |
+| d50_c2_fs2    |  6.3271 |
+| d30_c5_fs2    |  6.3223 |
+| d50_c5_fs2    |  6.2932 |
+| d30_c2_fs3    |  6.2905 |
+| d40_c5_fs2    |  6.2792 |
+| d30_c2_fs2    |  6.2745 |
+| d40_c2_fs2    |  6.2543 |
+| d30_c5_fs1    |  6.2132 |
+| d50_c2_fs3    |  6.2073 |
+| d40_c2_fs3    |  6.1975 |
 | d30_c5_fs0    |  6.1943 |
-| d30_c5_fs1    |  6.1943 |
-| d50_c5_fs1    |  6.1495 |
-| d50_c5_fs2    |  6.1495 |
+| d40_c5_fs1    |  6.1523 |
+| d50_c5_fs1    |  6.1517 |
 | d50_c5_fs0    |  6.1495 |
-| d50_c5_fs3    |  6.1495 |
 | d40_c5_fs0    |  6.1468 |
-| d40_c5_fs2    |  6.1468 |
-| d40_c5_fs3    |  6.1468 |
-| d40_c5_fs1    |  6.1468 |
 
 |   Divergence |   Score |
 |--------------|---------|
-|           50 |  6.9441 |
-|           40 |  6.6698 |
-|           10 |  6.6051 |
-|           30 |  6.5042 |
-|           20 |  6.4748 |
+|           50 |  6.9649 |
+|           40 |  6.7071 |
+|           10 |  6.641  |
+|           30 |  6.5511 |
+|           20 |  6.5219 |
 
 |   Convergence |   Score |
 |---------------|---------|
-|             0 |  7.1325 |
-|             7 |  6.6253 |
-|             2 |  6.5113 |
-|             5 |  6.2894 |
+|             7 |  6.9827 |
+|             0 |  6.9001 |
+|             2 |  6.4209 |
+|             5 |  6.4051 |
 
 |   Foreground Scale |   Score |
 |--------------------|---------|
+|                  3 |  6.7833 |
+|                  2 |  6.6596 |
 |                  0 |  6.6396 |
-|                  3 |  6.6396 |
-|                  1 |  6.6396 |
-|                  2 |  6.6396 |
+|                  1 |  6.6263 |
+
+### --mapper
+Model used was `Any_B`
 
 ### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0
 | Model         |   Score |

@@ -36,6 +36,7 @@ for model in models:
     divergence = 4.0
     foreground_scale = 0
     method = 'mlbw_l4s'
+    mapper = None
     edge_dilation = True
     depth_aa = True
     tta = True
