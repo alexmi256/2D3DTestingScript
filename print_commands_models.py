@@ -43,7 +43,7 @@ for model in models:
 
     #command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
 
-    command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence {convergence} --divergence {divergence} --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
+    command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale} --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
     # python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/012600_L.png --synthetic-view right --yes --depth-model DepthPro_S --find-param {divergence,convergence,foreground-scale} --output ~/Downloads/images_cropped/sample/param_generated/DepthPro_S/
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"

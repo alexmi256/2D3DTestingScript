@@ -34,6 +34,7 @@ LEGACY_MAPPER = [
 ]
 MAPPER_ALL = ["auto"] + list(dict.fromkeys(LEGACY_MAPPER + RELATIVE_MUL_MAPPER + METRIC_DIV_MAPPER))
 
+print(f"\nrm run_commands.sh && nano run_commands.sh && chmod +x run_commands.sh\n")
 print('source .venv/bin/activate')
 for mapper in list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER)):
     model = 'Any_B'
@@ -52,7 +53,7 @@ for mapper in list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER)):
     elif mapper in RELATIVE_SHIFT_MAPPER:
         mapper_type = 'shift'
 
-    command = f"mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/{mapper}; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --mapper {mapper} --output ~/Downloads/images_cropped/sample/mapper_generated/{mapper}/"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/{mapper}; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --mapper {mapper} --output ~/Downloads/images_cropped/sample/mapper_generated/{mapper}/ --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale} --depth-model {model}"
     if mapper_type:
         command += f" --mapper-type {mapper_type}"
     if edge_dilation and 'Any' in model:
@@ -64,5 +65,10 @@ for mapper in list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER)):
 
     print(command)
 
-print(f"\nmkdir {' '.join(MAPPER_ALL)}")
-print(f"\nrm run_commands.sh && nano run_commands.sh && chmod +x run_commands.sh")
+
+print("""
+cd /home/alex/PycharmProjects/nunifScripter/
+deactivate
+source .venv/bin/activate
+python3 compare_mapper.py
+""")

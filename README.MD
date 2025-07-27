@@ -438,7 +438,88 @@ I only used a smaller sample of 110 images for this test
 |                  1 |  6.6263 |
 
 ### --mapper
-Model used was `Any_B`
+Model used was `Any_B` without any fs options
+| Mapper    |   Score |
+|-----------|---------|
+| div_1     |  7.1796 |
+| softplus2 |  7.1352 |
+| mul_3     |  7.071  |
+| div_2     |  6.982  |
+| mul_2     |  6.8231 |
+| softplus  |  6.8039 |
+| div_4     |  6.7987 |
+| inv_mul_3 |  6.7252 |
+| shift_30  |  6.7184 |
+| div_6     |  6.7165 |
+| pow2      |  6.6896 |
+| inv_mul_2 |  6.658  |
+| mul_1     |  6.643  |
+| div_10    |  6.6404 |
+| shift_20  |  6.6269 |
+| inv_mul_1 |  6.5946 |
+| div_25    |  6.5662 |
+| shift_14  |  6.5623 |
+| none      |  6.5204 |
+| auto      |  6.5204 |
+| shift_08  |  6.5032 |
+| shift_045 |  6.495  |
+| shift_06  |  6.493  |
+
+With `--input X --synthetic-view right --yes --depth-model Any_B --mapper X --convergence 0.5 --divergence 4.0 --foreground-scale 0 --depth-model Any_B --mapper-type X`
+
+| Mapper    |   Score |
+|-----------|---------|
+| div_1     |  7.7866 |
+| softplus2 |  7.7461 |
+| mul_3     |  7.6129 |
+| div_2     |  7.3294 |
+| mul_2     |  7.0725 |
+| softplus  |  7.0277 |
+| div_4     |  6.8851 |
+| inv_mul_3 |  6.811  |
+| pow2      |  6.688  |
+| shift_30  |  6.6844 |
+| div_6     |  6.6797 |
+| mul_1     |  6.6286 |
+| inv_mul_2 |  6.5849 |
+| div_10    |  6.4978 |
+| shift_20  |  6.4666 |
+| inv_mul_1 |  6.3992 |
+| div_25    |  6.3336 |
+| shift_14  |  6.3257 |
+| shift_045 |  6.2686 |
+| none      |  6.2484 |
+| auto      |  6.2484 |
+| shift_06  |  6.2319 |
+| shift_08  |  6.2259 |
+
+With `--input X --synthetic-view right --yes --depth-model Any_B --mapper X --convergence 0.5 --divergence 5.0 --foreground-scale 1 --depth-model Any_B --mapper-type X`
+
+| Mapper    |   Score |
+|-----------|---------|
+| div_1     |  8.2193 |
+| softplus2 |  8.1899 |
+| mul_3     |  8.0245 |
+| div_2     |  7.6484 |
+| mul_2     |  7.355  |
+| softplus  |  7.2988 |
+| div_4     |  7.0817 |
+| inv_mul_3 |  6.9655 |
+| pow2      |  6.8479 |
+| shift_30  |  6.8178 |
+| div_6     |  6.8116 |
+| mul_1     |  6.7841 |
+| inv_mul_2 |  6.6301 |
+| div_10    |  6.5717 |
+| shift_20  |  6.5312 |
+| inv_mul_1 |  6.3758 |
+| div_25    |  6.3575 |
+| shift_14  |  6.3468 |
+| shift_045 |  6.2728 |
+| none      |  6.2467 |
+| auto      |  6.2467 |
+| shift_06  |  6.2236 |
+| shift_08  |  6.2197 |
 
 ### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0
 | Model         |   Score |
