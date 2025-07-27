@@ -30,20 +30,22 @@ models = ["ZoeD_N",
           # "VDA_Stream_L"
 ]
 
+print(f"\nrm run_commands.sh && nano run_commands.sh && chmod +x run_commands.sh\n")
+
 print('source .venv/bin/activate')
 for model in models:
     convergence = 0.5
     divergence = 4.0
     foreground_scale = 0
     method = 'mlbw_l4s'
-    mapper = None
+    mapper = 'shift_08'
     edge_dilation = True
     depth_aa = True
-    tta = True
+    tta = False
 
     #command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
 
-    command = f"python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale} --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/right_generated/{model}/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale} --depth-model {model} --output ~/Downloads/images_cropped/sample/right_generated/{model}/"
     # python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/012600_L.png --synthetic-view right --yes --depth-model DepthPro_S --find-param {divergence,convergence,foreground-scale} --output ~/Downloads/images_cropped/sample/param_generated/DepthPro_S/
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"
@@ -53,8 +55,14 @@ for model in models:
         command += f" --tta"
     if method:
         command += f" --method {method}"
+    if mapper:
+        command += f" --mapper {mapper}"
 
     print(command)
 
-print(f"\nmkdir {' '.join(models)}")
-print(f"\nrm run_commands.sh && nano run_commands.sh && chmod +x run_commands.sh")
+print("""
+cd /home/alex/PycharmProjects/nunifScripter/
+deactivate
+source .venv/bin/activate
+python3 compare_models.py
+""")

@@ -123,7 +123,7 @@ mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/softplus; python3 -m
 
 ## print_commands_methods.py
 Prints `nunif iw3.cli`  commands to generate the right sample images for all methods
-```
+```sh
 source .venv/bin/activate
 mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/backward/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method backward --output ~/Downloads/images_cropped/sample/right_generated_method/backward/
 mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/forward/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model ZoeD_Any_N --method forward --output ~/Downloads/images_cropped/sample/right_generated_method/forward/
@@ -548,6 +548,38 @@ With `--input X --synthetic-view right --yes --depth-model Any_B --mapper X --co
 | ZoeD_Any_N    |  6.2473 |
 | DepthPro      |  6.097  |
 | DepthPro_S    |  6.0856 |
+
+
+### --convergence 0.5 --divergence 4.0 --foreground-scale 0 --depth-aa --method mlbw_l4s --mapper shift_08
+According to [nunif](https://github.com/nagadomi/nunif/discussions/300#discussioncomment-13894265) only relative depth models (Distill_Any_L, Distill_Any_B, Distill_Any_S, Any_V2_B, Any_V2_L, and Any_V2_S, Any_L, Any_S, Any_B)
+would benefit from it. This is apparent here because other models perform worse with this.
+
+| Model         |   Score |
+|---------------|---------|
+| ZoeD_Any_K    |  6.868  |
+| ZoeD_K        |  6.7601 |
+| ZoeD_NK       |  6.758  |
+| Any_V2_K_S    |  6.6639 |
+| Any_V2_K_L    |  6.6439 |
+| Any_V2_K      |  6.6439 |
+| Any_V2_K_B    |  6.6222 |
+| ZoeD_Any_N    |  6.6069 |
+| ZoeD_N        |  6.5769 |
+| DepthPro_S    |  6.5498 |
+| Any_V2_N_S    |  6.5386 |
+| DepthPro      |  6.5309 |
+| Any_V2_N      |  6.5203 |
+| Any_V2_N_L    |  6.5203 |
+| Any_V2_N_B    |  6.5124 |
+| Distill_Any_B |  6.3048 |
+| Distill_Any_S |  6.2957 |
+| Distill_Any_L |  6.2944 |
+| Any_V2_B      |  6.2799 |
+| Any_V2_S      |  6.2718 |
+| Any_V2_L      |  6.269  |
+| Any_S         |  6.2279 |
+| Any_B         |  6.2251 |
+| Any_L         |  6.22   |
 
 ### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0 --method mlbw_l4s --tta
 | Model         |   Score |
