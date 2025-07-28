@@ -36,12 +36,15 @@ MAPPER_ALL = ["auto"] + list(dict.fromkeys(LEGACY_MAPPER + RELATIVE_MUL_MAPPER +
 
 print(f"\nrm run_commands.sh && nano run_commands.sh && chmod +x run_commands.sh\n")
 print('source .venv/bin/activate')
-for mapper in list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER)):
-    model = 'Any_B'
+all_mappers = list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER))
+for i, mapper in enumerate(all_mappers):
+    model = 'DepthPro'
     convergence = 0.5
     divergence = 4.0
     foreground_scale = 0
-    edge_dilation = False
+    edge_dilation = True
+    method = 'mlbw_l4s'
+    method = ''
     depth_aa = False
     tta = False
 
@@ -53,13 +56,15 @@ for mapper in list(set(MAPPER_ALL + RELATIVE_SHIFT_MAPPER)):
     elif mapper in RELATIVE_SHIFT_MAPPER:
         mapper_type = 'shift'
 
-    command = f"mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/{mapper}; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --mapper {mapper} --output ~/Downloads/images_cropped/sample/mapper_generated/{mapper}/ --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale} --depth-model {model}"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/mapper_generated/{mapper}; echo \"Run {i+1}/{len(all_mappers)}\";python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --mapper {mapper} --output ~/Downloads/images_cropped/sample/mapper_generated/{mapper}/ --convergence {convergence} --divergence {divergence} --foreground-scale {foreground_scale}"
     if mapper_type:
         command += f" --mapper-type {mapper_type}"
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"
     if depth_aa:
         command += f" --depth-aa"
+    if method:
+        command += f" --method {method}"
     if tta:
         command += f" --tta"
 

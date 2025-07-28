@@ -4,8 +4,8 @@ Comparisons were performed using [imgcompare](https://github.com/datenhahn/imgco
 
 # TL;DR
 For right image only synthetic view:
-- Use `--model ZoeD_Any_N --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0 --method mlbw_l4s` for almost best in class generation and performance
-- Use `--model DepthPro_S --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0 --method mlbw_l4s --tta` for best in class generation but 4x slower performance
+- Use `--model ZoeD_Any_N --edge-dilation 2 --depth-aa --convergence 0.5 --divergence 4.0 --foreground-scale 0 --method mlbw_l4s --mapper mul_2 --mapper-type mul` for almost best in class generation (6.2134% difference vs ground truth) and performance
+- Use `--model DepthPro --edge-dilation 2 --depth-aa --convergence 0.5 --divergence 4.0 --foreground-scale 0 --method mlbw_l4s --mapper div_2 --mapper-type div --tta` for best in class generation (5.8481%)  but ~5x slower performance
 
 # Summary
 - `DepthPro_S` seems to be the best model even though it's smaller than `DepthPro`
@@ -15,12 +15,17 @@ For right image only synthetic view:
 - `--tta` doesn't matter much, marginal improvement
 - `--divergence` and `--convergence` do seem to make a slight difference in right frame generation
 - `--foreground-scale` either does nothing or is only applicable in certain conditions
-- These score likely don't mean much
+- These score likely don't mean much because
   - A 5% difference between ground truth and generated may actually be a lot. gt right vs gt left difference is ~7.021% 
   - While I finetuned parameters for "right frame only" generation, `iw3` uses both frame generation by default so these fine tuned settings may be invalid with that mode which I believed may result in better generation
   - Ideally I'd be able to generate a depth map from L and R frames and compare that against iw3 generated map. This proves to be difficult in that all examples I've seen of this generate messy maps which could not be compared against the iw3 maps.
+  - I've very likely overfit the suggested params to my specific dataset
 - VideoDepthAnything was not tested
 
+# FUTURE
+- (hope) Try out VideoDepthAnything
+- (wish) Try out UniK3D
+- (wish) Try out UniDepthV2
 # Setup
 ```
 ../images_cropped/
@@ -329,7 +334,7 @@ I used `ZoeD_Any_N` as the model to test this with
 ### --find-params
 I used `ZoeD_Any_N` as the model to test this with
 This generates a combination (80) of divergence, convergence, foreground-scale images just for one image
-I only used a smaller sample of 110 images for this test
+I only used a smaller (10%) sample of 110 images for this test so that is likely why these numbers don't match up with the othe results that use 
 
 
 | Combination   |   Score |
@@ -521,36 +526,8 @@ With `--input X --synthetic-view right --yes --depth-model Any_B --mapper X --co
 | shift_06  |  6.2236 |
 | shift_08  |  6.2197 |
 
-### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0
-| Model         |   Score |
-|---------------|---------|
-| Any_V2_K_B    |  6.5049 |
-| ZoeD_Any_K    |  6.4538 |
-| ZoeD_NK       |  6.4198 |
-| Any_V2_K_S    |  6.4086 |
-| Any_V2_K_L    |  6.3935 |
-| Any_V2_K      |  6.3935 |
-| Distill_Any_L |  6.3747 |
-| ZoeD_K        |  6.3696 |
-| Distill_Any_B |  6.3644 |
-| Distill_Any_S |  6.3527 |
-| Any_V2_B      |  6.3328 |
-| Any_V2_L      |  6.3288 |
-| Any_V2_S      |  6.3272 |
-| Any_V2_N_S    |  6.2999 |
-| Any_V2_N_B    |  6.2968 |
-| ZoeD_N        |  6.2829 |
-| Any_V2_N      |  6.2786 |
-| Any_V2_N_L    |  6.2786 |
-| Any_L         |  6.2562 |
-| Any_S         |  6.2501 |
-| Any_B         |  6.2484 |
-| ZoeD_Any_N    |  6.2473 |
-| DepthPro      |  6.097  |
-| DepthPro_S    |  6.0856 |
+With  `--convergence 0.5 --divergence 4.0 --foreground-scale 0 --depth-aa --method mlbw_l4s --mapper shift_08`
 
-
-### --convergence 0.5 --divergence 4.0 --foreground-scale 0 --depth-aa --method mlbw_l4s --mapper shift_08
 According to [nunif](https://github.com/nagadomi/nunif/discussions/300#discussioncomment-13894265) only relative depth models (Distill_Any_L, Distill_Any_B, Distill_Any_S, Any_V2_B, Any_V2_L, and Any_V2_S, Any_L, Any_S, Any_B)
 would benefit from it. This is apparent here because other models perform worse with this.
 
@@ -580,6 +557,178 @@ would benefit from it. This is apparent here because other models perform worse 
 | Any_S         |  6.2279 |
 | Any_B         |  6.2251 |
 | Any_L         |  6.22   |
+
+With `--depth-model Any_V2_L --mapper * --output --convergence 0.5 --divergence 4.0 --foreground-scale 0 --mapper-type * --edge-dilation 2 --depth-aa --method mlbw_l4s`
+
+Wanted to explore mappers for Any_V2_L to see if it could beat other scores but it did not
+
+| Mapper    |   Score |
+|-----------|---------|
+| softplus2 |  8.0087 |
+| div_1     |  7.9692 |
+| mul_3     |  7.8931 |
+| div_2     |  7.5504 |
+| mul_2     |  7.3758 |
+| softplus  |  7.3291 |
+| div_4     |  7.1107 |
+| pow2      |  6.9246 |
+| shift_30  |  6.8944 |
+| div_6     |  6.8893 |
+| mul_1     |  6.8742 |
+| inv_mul_3 |  6.798  |
+| div_10    |  6.6744 |
+| shift_20  |  6.6352 |
+| inv_mul_2 |  6.576  |
+| div_25    |  6.4572 |
+| shift_14  |  6.4455 |
+| inv_mul_1 |  6.4023 |
+| none      |  6.32   |
+| auto      |  6.32   |
+| shift_08  |  6.269  |
+| shift_045 |  6.2645 |
+| shift_06  |  6.2462 |
+
+With `--depth-model ZoeD_Any_N --mapper * --convergence 0.5 --divergence 4.0 --foreground-scale 0 --mapper-type * --edge-dilation 2 --depth-aa --method mlbw_l4s`
+Wanted to explore mappers for `ZoeD_Any_N` to see if it could beat other scores
+
+| Mapper    |   Score |
+|-----------|---------|
+| inv_mul_3 |  7.1692 |
+| inv_mul_2 |  6.9962 |
+| inv_mul_1 |  6.8386 |
+| shift_045 |  6.8217 |
+| shift_06  |  6.7147 |
+| shift_08  |  6.6069 |
+| div_1     |  6.5741 |
+| none      |  6.527  |
+| shift_14  |  6.4176 |
+| div_25    |  6.41   |
+| shift_20  |  6.3194 |
+| div_10    |  6.3045 |
+| softplus2 |  6.3018 |
+| mul_1     |  6.287  |
+| div_2     |  6.2843 |
+| mul_3     |  6.2516 |
+| pow2      |  6.2514 |
+| div_6     |  6.2467 |
+| auto      |  6.2467 |
+| shift_30  |  6.2457 |
+| div_4     |  6.2199 |
+| softplus  |  6.217  |
+| mul_2     |  6.2134 |
+
+With `--depth-model DepthPro_S * --convergence 0.5 --divergence 4.0 --foreground-scale 0 --mapper-type * --edge-dilation 2 --depth-aa --method mlbw_l4s`
+
+| Mapper    |   Score |
+|-----------|---------|
+| inv_mul_3 |  7.1436 |
+| inv_mul_2 |  6.9632 |
+| inv_mul_1 |  6.7975 |
+| shift_045 |  6.777  |
+| shift_06  |  6.665  |
+| shift_08  |  6.5498 |
+| none      |  6.4607 |
+| shift_14  |  6.3293 |
+| div_25    |  6.3197 |
+| shift_20  |  6.2033 |
+| div_10    |  6.1831 |
+| mul_1     |  6.1754 |
+| div_1     |  6.1214 |
+| pow2      |  6.1179 |
+| div_6     |  6.0927 |
+| auto      |  6.0927 |
+| shift_30  |  6.0909 |
+| softplus  |  6.0783 |
+| mul_2     |  6.0707 |
+| softplus2 |  6.045  |
+| mul_3     |  6.0381 |
+| div_4     |  6.0325 |
+| div_2     |  5.9984 |
+
+With `--depth-model DepthPro --mapper * --convergence 0.5 --divergence 4.0 --foreground-scale 0 --mapper-type *`
+
+| Mapper    |   Score |
+|-----------|---------|
+| inv_mul_3 |  6.991  |
+| inv_mul_2 |  6.8549 |
+| inv_mul_1 |  6.7234 |
+| shift_045 |  6.6961 |
+| shift_06  |  6.61   |
+| shift_08  |  6.5192 |
+| none      |  6.446  |
+| shift_14  |  6.3329 |
+| div_25    |  6.3244 |
+| shift_20  |  6.2145 |
+| div_10    |  6.194  |
+| mul_1     |  6.1737 |
+| pow2      |  6.1223 |
+| div_6     |  6.097  |
+| auto      |  6.097  |
+| shift_30  |  6.0949 |
+| softplus  |  6.0552 |
+| mul_2     |  6.0444 |
+| div_4     |  6.015  |
+| mul_3     |  5.9405 |
+| div_1     |  5.9165 |
+| softplus2 |  5.9164 |
+| div_2     |  5.908  |
+
+
+### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0
+| Model         |   Score |
+|---------------|---------|
+| Any_V2_K_B    |  6.5049 |
+| ZoeD_Any_K    |  6.4538 |
+| ZoeD_NK       |  6.4198 |
+| Any_V2_K_S    |  6.4086 |
+| Any_V2_K_L    |  6.3935 |
+| Any_V2_K      |  6.3935 |
+| Distill_Any_L |  6.3747 |
+| ZoeD_K        |  6.3696 |
+| Distill_Any_B |  6.3644 |
+| Distill_Any_S |  6.3527 |
+| Any_V2_B      |  6.3328 |
+| Any_V2_L      |  6.3288 |
+| Any_V2_S      |  6.3272 |
+| Any_V2_N_S    |  6.2999 |
+| Any_V2_N_B    |  6.2968 |
+| ZoeD_N        |  6.2829 |
+| Any_V2_N      |  6.2786 |
+| Any_V2_N_L    |  6.2786 |
+| Any_L         |  6.2562 |
+| Any_S         |  6.2501 |
+| Any_B         |  6.2484 |
+| ZoeD_Any_N    |  6.2473 |
+| DepthPro      |  6.097  |
+| DepthPro_S    |  6.0856 |
+
+### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0 --method mlbw_l4s
+| Model         |   Score |
+|---------------|---------|
+| Any_V2_K_B    |  6.4996 |
+| ZoeD_Any_K    |  6.4532 |
+| ZoeD_NK       |  6.4182 |
+| Any_V2_K_S    |  6.4042 |
+| Any_V2_K_L    |  6.3886 |
+| Any_V2_K      |  6.3886 |
+| ZoeD_K        |  6.3697 |
+| Distill_Any_L |  6.3672 |
+| Distill_Any_B |  6.3557 |
+| Distill_Any_S |  6.3446 |
+| Any_V2_B      |  6.3244 |
+| Any_V2_L      |  6.32   |
+| Any_V2_S      |  6.3199 |
+| Any_V2_N_S    |  6.2959 |
+| Any_V2_N_B    |  6.2906 |
+| ZoeD_N        |  6.2791 |
+| Any_V2_N      |  6.2724 |
+| Any_V2_N_L    |  6.2724 |
+| Any_L         |  6.2531 |
+| Any_S         |  6.2477 |
+| ZoeD_Any_N    |  6.2467 |
+| Any_B         |  6.2462 |
+| DepthPro_S    |  6.0927 |
+| DepthPro      |  6.0723 |
 
 ### --edge-dilation --depth-aa --convergence 0.5 --divergence 4.0 --method mlbw_l4s --tta
 | Model         |   Score |

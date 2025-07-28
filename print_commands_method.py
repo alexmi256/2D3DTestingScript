@@ -15,7 +15,7 @@ methods = [
 ]
 
 print('source .venv/bin/activate')
-for method in methods:
+for i, method in enumerate(methods):
     model = 'ZoeD_Any_N'
     convergence = 0.2
     divergence = 1.0
@@ -24,7 +24,7 @@ for method in methods:
     depth_aa = False
     tta = False
 
-    command = f"mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/{method}/; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --method {method} --output ~/Downloads/images_cropped/sample/right_generated_method/{method}/"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/right_generated_method/{method}/; echo \"Run {i+1}/{len(methods)}\"; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/ --synthetic-view right --yes --depth-model {model} --method {method} --output ~/Downloads/images_cropped/sample/right_generated_method/{method}/"
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"
     if depth_aa:

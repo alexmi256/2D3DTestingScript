@@ -14,7 +14,7 @@ for i, x in enumerate(gt_images):
 #print(len(gt_images_small))
 
 print('source .venv/bin/activate')
-for image in gt_images_small:
+for i, image in enumerate(gt_images_small):
     image_name = image.name
     generated_image_folder = image.stem.replace('_L', '_R')
     model = 'ZoeD_Any_N'
@@ -25,7 +25,7 @@ for image in gt_images_small:
     depth_aa = False
     tta = False
 
-    command = f"mkdir -p ~/Downloads/images_cropped/sample/param_generated/{generated_image_folder}; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/{image.name} --synthetic-view right --yes --depth-model {model} --find-param {{divergence,convergence,foreground-scale}} --output ~/Downloads/images_cropped/sample/param_generated/{generated_image_folder}/"
+    command = f"mkdir -p ~/Downloads/images_cropped/sample/param_generated/{generated_image_folder}; echo \"Run {i+1}/{len(gt_images_small)}\"; python3 -m iw3.cli --input ~/Downloads/images_cropped/sample/left/{image.name} --synthetic-view right --yes --depth-model {model} --find-param {{divergence,convergence,foreground-scale}} --output ~/Downloads/images_cropped/sample/param_generated/{generated_image_folder}/"
     if edge_dilation and 'Any' in model:
         command += f" --edge-dilation 2"
     if depth_aa:
